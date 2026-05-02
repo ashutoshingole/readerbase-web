@@ -14,6 +14,12 @@ Static site for [Readerbase](https://readerbase.in), hosted on **GitHub Pages**.
 3. **GitHub:** Repo → **Settings** → **Pages** → deploy from branch `main`, folder `/ (root)`.
 4. **Custom domain:** Add a `CNAME` file containing `readerbase.in` (or `www.readerbase.in`), then configure DNS per [GitHub Pages custom domain docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site).
 
-## Share URL
+## URLs
 
-Use `https://readerbase.in/` (or your GitHub Pages URL until DNS is ready) in the app’s share message.
+**Project Pages** sites live under the repo name, e.g.  
+`https://<username>.github.io/<repo>/`  
+Privacy: `https://<username>.github.io/<repo>/privacy/` — not `/privacy/` on the domain root (that 404s).
+
+Links in this repo use **relative** paths (`privacy/`, `../`) so they work for project Pages. After you add a **custom apex domain**, the same relative links still work.
+
+Use your real Pages URL in the app’s share message and for App Store / Play privacy policy fields.
