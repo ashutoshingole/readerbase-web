@@ -11,36 +11,46 @@
     a { color: #5c4d3c; }
     .muted { color: #666; font-size: 0.9rem; }
   </style>
+</head>
+<body>
+  <h1>Readerbase</h1>
+  <p class="muted">A quiet space for readers. Choose your store:</p>
+  <p><a href="https://play.google.com/store/apps/details?id=com.example.lit_library_app">Google Play (Android)</a></p>
+  <p><a id="ios-store-link" href="#">App Store (iOS)</a></p>
+  <p class="muted"><a href="privacy/">Privacy policy</a></p>
   <script>
     (function () {
       var PLAY = "https://play.google.com/store/apps/details?id=com.example.lit_library_app";
       // After first App Store release, set only the numeric id (e.g. 6751234567).
       var APP_STORE_NUMERIC_ID = "YOUR_NUMERIC_APP_ID";
-      var APP_STORE = (APP_STORE_NUMERIC_ID.indexOf("YOUR_") === -1)
+      var APP_STORE_HTTPS = (APP_STORE_NUMERIC_ID.indexOf("YOUR_") === -1)
         ? "https://apps.apple.com/app/id" + APP_STORE_NUMERIC_ID
-        : "https://apps.apple.com/search?term=Readerbase";
+        : "https://apps.apple.com/search?term=" + encodeURIComponent("Readerbase");
 
+      /** Opens the native App Store app on iPhone/iPad (https:// often stays in Safari / in-app browser). */
+      function appStoreNativeUrl(httpsUrl) {
+        return httpsUrl.replace(/^https:\/\//i, "itms-apps://");
+      }
+
+      var APP_STORE_NATIVE = appStoreNativeUrl(APP_STORE_HTTPS);
       var ua = navigator.userAgent || navigator.vendor || "";
       var ios = /iPad|iPhone|iPod/i.test(ua)
         || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
       var android = /Android/i.test(ua);
+
+      var iosLink = document.getElementById("ios-store-link");
+      if (iosLink) {
+        iosLink.href = APP_STORE_NATIVE;
+      }
 
       if (android) {
         window.location.replace(PLAY);
         return;
       }
       if (ios) {
-        window.location.replace(APP_STORE);
-        return;
+        window.location.replace(APP_STORE_NATIVE);
       }
     })();
   </script>
-</head>
-<body>
-  <h1>Readerbase</h1>
-  <p class="muted">A quiet space for readers. Choose your store:</p>
-  <p><a href="https://play.google.com/store/apps/details?id=com.example.lit_library_app">Google Play (Android)</a></p>
-  <p><a href="https://apps.apple.com/search?term=Readerbase">App Store (iOS)</a></p>
-  <p class="muted"><a href="privacy/">Privacy policy</a></p>
 </body>
 </html>
