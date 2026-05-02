@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Readerbase — download on the App Store or Google Play." />
+  <title>Readerbase</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 28rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; color: #1a1a1a; }
+    h1 { font-size: 1.25rem; }
+    a { color: #5c4d3c; }
+    .muted { color: #666; font-size: 0.9rem; }
+  </style>
+  <script>
+    (function () {
+      var PLAY = "https://play.google.com/store/apps/details?id=com.example.lit_library_app";
+      // Replace YOUR_NUMERIC_APP_ID with your App Store Connect ID (e.g. 1234567890)
+      var APP_STORE = "https://apps.apple.com/app/idYOUR_NUMERIC_APP_ID";
+      var ua = navigator.userAgent || navigator.vendor || "";
+      var ios = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      var android = /Android/i.test(ua);
+      if (ios && APP_STORE.indexOf("YOUR_NUMERIC") === -1) {
+        window.location.replace(APP_STORE);
+      } else if (android) {
+        window.location.replace(PLAY);
+      }
+    })();
+  </script>
+</head>
+<body>
+  <h1>Readerbase</h1>
+  <p class="muted">A quiet space for readers. Choose your store:</p>
+  <p><a href="https://play.google.com/store/apps/details?id=com.example.lit_library_app">Google Play (Android)</a></p>
+  <p><a href="https://apps.apple.com/app/idYOUR_NUMERIC_APP_ID">App Store (iOS)</a></p>
+  <p class="muted"><a href="/privacy/">Privacy policy</a></p>
+</body>
+</html>
