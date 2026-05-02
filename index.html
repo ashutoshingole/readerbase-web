@@ -14,15 +14,24 @@
   <script>
     (function () {
       var PLAY = "https://play.google.com/store/apps/details?id=com.example.lit_library_app";
-      // Replace YOUR_NUMERIC_APP_ID with your App Store Connect ID (e.g. 1234567890)
-      var APP_STORE = "https://apps.apple.com/app/idYOUR_NUMERIC_APP_ID";
+      // After first App Store release, set only the numeric id (e.g. 6751234567).
+      var APP_STORE_NUMERIC_ID = "YOUR_NUMERIC_APP_ID";
+      var APP_STORE = (APP_STORE_NUMERIC_ID.indexOf("YOUR_") === -1)
+        ? "https://apps.apple.com/app/id" + APP_STORE_NUMERIC_ID
+        : "https://apps.apple.com/search?term=Readerbase";
+
       var ua = navigator.userAgent || navigator.vendor || "";
-      var ios = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      var ios = /iPad|iPhone|iPod/i.test(ua)
+        || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
       var android = /Android/i.test(ua);
-      if (ios && APP_STORE.indexOf("YOUR_NUMERIC") === -1) {
-        window.location.replace(APP_STORE);
-      } else if (android) {
+
+      if (android) {
         window.location.replace(PLAY);
+        return;
+      }
+      if (ios) {
+        window.location.replace(APP_STORE);
+        return;
       }
     })();
   </script>
@@ -31,7 +40,7 @@
   <h1>Readerbase</h1>
   <p class="muted">A quiet space for readers. Choose your store:</p>
   <p><a href="https://play.google.com/store/apps/details?id=com.example.lit_library_app">Google Play (Android)</a></p>
-  <p><a href="https://apps.apple.com/app/idYOUR_NUMERIC_APP_ID">App Store (iOS)</a></p>
+  <p><a href="https://apps.apple.com/search?term=Readerbase">App Store (iOS)</a></p>
   <p class="muted"><a href="privacy/">Privacy policy</a></p>
 </body>
 </html>
